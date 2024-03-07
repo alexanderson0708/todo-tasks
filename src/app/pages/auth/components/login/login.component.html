@@ -1,0 +1,70 @@
+<ng-container *ngIf="data$ | async as data">
+  <div class="login-page">
+    <div class="container page">
+      <div class="image-container">
+        <img src="../../../../assets/image.png" alt="logo" />
+      </div>
+      <div class="login-form-container">
+        <h1 class="signIn">Авторизация</h1>
+        <app-backend-error
+          *ngIf="data.backErrors"
+          [backErrors]="data.backErrors"
+        ></app-backend-error>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <mat-form-field>
+            <mat-label>Эл. почта</mat-label>
+            <input
+              type="email"
+              matInput
+              placeholder="Ex. pat@example.com"
+              formControlName="email"
+            />
+            @if (form.hasError('email') && !form.hasError('required')) {
+              <mat-error>Пожалуйста введите корретно эл. почту</mat-error>
+            }
+            @if (form.hasError('required')) {
+              <mat-error>Эл. почта <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Пароль</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <button
+            mat-flat-button
+            style="
+              background-color: #4971ff;
+              color: white;
+              border-radius: 10px;
+              font-family: Inter;
+              font-size: 12pt;
+              font-weight: 300;
+              letter-spacing: 0;
+              max-width: 322px;
+              height: 46px;
+              width: 100%;
+            "
+            type="submit"
+            class="btn btn-lg"
+            [disabled]="data.isSubmitting"
+          >
+            Войти в систему
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>

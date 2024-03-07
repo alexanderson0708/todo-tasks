@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; font-family: "Inter", sans-serif;}
+body { margin: 0; font-family: "Inter", sans-serif; }
+.mdc-text-field--outlined {
+    --mdc-outlined-text-field-container-shape: 10px !important;
+  }
+
+.green-alert{
+    background-color: greenyellow;
+    color: white;
+}
+
+.green-alert button, .red-alert button{
+    border: none;
+}
+
+.red-alert{
+    background-color: red;
+    color: white;
+}

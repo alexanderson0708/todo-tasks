@@ -1,0 +1,69 @@
+<form [formGroup]="addTaskForm" (ngSubmit)="saveTask()">
+  <mat-card-header>
+    <div class="header-container">
+      <p>Создание новой задачи</p>
+      <mat-icon (click)="closePopup()">close</mat-icon>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="form-wrapper first">
+      <div class="form-container data">
+        <mat-label>Дата создания</mat-label>
+        <mat-form-field
+          floatLabel="always"
+          appearance="outline"
+          max-width="50px"
+        >
+          <input matInput formControlName="date" />
+        </mat-form-field>
+      </div>
+      <div class="form-container title">
+        <mat-label>Название</mat-label>
+        <mat-form-field floatLabel="always" appearance="outline">
+          <input matInput formControlName="title" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-wrapper second">
+      <div class="form-container">
+        <mat-label>Описание</mat-label>
+        <mat-form-field floatLabel="always" appearance="outline">
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-label>Приоритет задачи</mat-label>
+        <mat-radio-group
+          aria-label="Select an option"
+          formControlName="priority"
+        >
+          <mat-radio-button color="primary" value="Низкий"
+            >Низкий</mat-radio-button
+          >
+          <mat-radio-button color="accent" value="Средний"
+            >Средний</mat-radio-button
+          >
+          <mat-radio-button color="warn" value="Высокий"
+            >Высокий</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+      <div class="form-container">
+        <mat-label>Исполнитель</mat-label>
+        <mat-form-field floatLabel="always" appearance="outline">
+          <mat-select formControlName="user">
+            <mat-option *ngFor="let user of userList" [value]="user.id">{{
+              user.displayName
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-card-actions>
+      <button mat-stroked-button color="primary" type="submit">
+        Сохранить
+      </button>
+      <button mat-stroked-button color="primary">Сохранить как черновик</button>
+    </mat-card-actions>
+  </mat-card-content>
+</form>
