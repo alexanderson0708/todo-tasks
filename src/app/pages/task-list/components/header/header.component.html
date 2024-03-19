@@ -1,0 +1,19 @@
+<div class="main-header-wraper">
+  <p class="title-page">{{ title }}</p>
+  <div class="user-wrapper" *ngIf="currentUser$ | async as user">
+    <div class="user">
+      <div class="img-container">
+        <img
+          *ngIf="user.avatar; else noAvatarIcon"
+          [src]="user.avatar"
+          class="avatar"
+          alt="Аватар"
+        />
+      </div>
+      <ng-template #noAvatarIcon>
+        <mat-icon>account_circle</mat-icon>
+      </ng-template>
+      <p>{{ user.displayName }}</p>
+    </div>
+  </div>
+</div>

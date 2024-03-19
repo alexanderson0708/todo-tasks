@@ -1,0 +1,108 @@
+<mat-card>
+  <mat-card-header>
+    <div class="sort-component-wrapper">
+      <form action="" class="header-container" id="sort-selector">
+        <label for="sort-selector">Сортировать по:</label>
+        <select
+          name="options"
+          (change)="onChange()"
+          [(ngModel)]="selectedValue"
+        >
+          <option value="date">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Дате
+          </option>
+          <option value="name">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Исполнителю
+          </option>
+          <option value="priority">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Приоритету
+          </option>
+          <option value="title">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Названию
+          </option>
+        </select>
+      </form>
+      <button
+        mat-flat-button
+        style="
+          background-color: #4971ff;
+          color: white;
+          border-radius: 10px;
+          font-family: Inter;
+          font-size: 12pt;
+          font-weight: 300;
+          letter-spacing: 0;
+          max-width: 202px;
+          height: 46px;
+          width: 100%;
+        "
+        (click)="addTask()"
+      >
+        Добавить задачу
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content *ngIf="isLoadTask">
+    <table mat-table [dataSource]="datasource" class="mat-elevation-z8">
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>ДАТА СОЗДАНИЯ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ formatDate(element.date) }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef>ИСПОЛНИТЕЛЬ</th>
+        <td class="name" mat-cell *matCellDef="let element">
+          <img
+            *ngIf="element.avatar; else noAvatarIcon"
+            [src]="element.avatar"
+            class="avatar"
+            alt="Аватар"
+          />
+          <ng-template #noAvatarIcon>
+            <mat-icon>account_circle</mat-icon>
+          </ng-template>
+          <p>{{ element.name }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef>ПРИОРИТЕТ ЗАДАЧА</th>
+        <td mat-cell *matCellDef="let element">
+          <div
+            [ngClass]="{
+              'priority-high': element.priority === 'Высокий',
+              'priority-medium': element.priority === 'Средний',
+              'priority-low': element.priority === 'Низкий'
+            }"
+          >
+            {{ element.priority }}
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>НАЗВАНИЕ ЗАДАЧИ</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element" style="cursor: pointer">
+          <mat-icon class="close-icon" (click)="removeTask(element.id)"
+            >close</mat-icon
+          >
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator
+      class="mat-elevation-z8"
+      [pageSizeOptions]="[9]"
+      [hidePageSize]="true"
+    ></mat-paginator>
+  </mat-card-footer>
+  <ng-container *ngIf="!isLoadTask">
+    <mat-spinner></mat-spinner>
+  </ng-container>
+</mat-card>

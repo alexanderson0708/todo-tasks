@@ -1,0 +1,126 @@
+form {
+  max-width: 765px;
+  max-height: 658px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+mat-card-header,
+mat-card-content,
+mat-card-action {
+  box-sizing: border-box;
+  width: 100%;
+  padding-inline: 2.5em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+p {
+  margin: 0;
+}
+.header-container {
+  display: flex;
+  width: 100%;
+  font-size: 18pt;
+  font-weight: 300;
+  line-height: 36px;
+  justify-content: space-between;
+}
+p {
+  text-align: start;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.form-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+.form-wrapper.first {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  column-gap: 1.5em;
+}
+.form-wrapper.first .form-container {
+  width: 100%;
+}
+
+.form-wrapper.first .data {
+  flex: 30%;
+  max-width: 200px;
+}
+
+.form-wrapper.first .title {
+  flex: 70%;
+  max-width: 445px;
+}
+
+.form-wrapper.second {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-container,
+.mat-radio-group {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+textarea.mat-input-element,
+mat-select {
+  width: 100%;
+}
+
+mat-card-actions {
+  column-gap: 1em;
+  padding: 0;
+}
+
+mat-label,
+mat-form-field {
+  font-size: 10pt;
+  font-weight: 200;
+  text-align: left;
+}
+
+mat-form-field {
+  --mat-form-field-container-height: 50px;
+  --mat-form-field-container-vertical-padding: 12px;
+}
+
+.custom-radio-1 .mat-radio-outer-circle {
+  border-color: red;
+}
+.custom-radio-1 .mat-radio-inner-circle {
+  background-color: red;
+}
+
+.custom-radio-2 .mat-radio-outer-circle {
+  border-color: blue;
+}
+.custom-radio-2 .mat-radio-inner-circle {
+  background-color: blue;
+}
+
+.custom-radio-3 .mat-radio-outer-circle {
+  border-color: green;
+}
+.custom-radio-3 .mat-radio-inner-circle {
+  background-color: green;
+}
+p {
+  padding: 1em, 0;
+}
